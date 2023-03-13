@@ -106,9 +106,6 @@ jobs:
           asset_path: |
             asset/*.workbook
           overwrite: true
-#      - name: Move asset
-#        run: |
-#          mv -f asset/azuredeploy.json asset/ReliabilityWorkbook.json workbooks/
       - uses: EndBug/add-and-commit@v9.0.1
         with:
           author_name: github-actions
@@ -117,5 +114,3 @@ jobs:
           push: origin main --force --set-upstream
           add: |
             asset/*.workbook
-#            workbooks/azuredeploy.json
-#            workbooks/ReliabilityWorkbook.json
