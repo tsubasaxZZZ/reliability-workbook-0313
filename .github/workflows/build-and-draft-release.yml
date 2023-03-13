@@ -100,13 +100,12 @@ jobs:
         uses: actions/download-artifact@v3
       - name: Display structure of downloaded files
         run: ls -lR
-#      - uses: shogo82148/actions-upload-release-asset@v1
-#        with:
-#          upload_url: ${{ steps.release_drafter.outputs.upload_url }}
-#          asset_path: |
-#            asset/azuredeploy.json
-#            asset/ReliabilityWorkbook.json
-#          overwrite: true
+      - uses: shogo82148/actions-upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.release_drafter.outputs.upload_url }}
+          asset_path: |
+            asset/*.workbook
+          overwrite: true
 #      - name: Move asset
 #        run: |
 #          mv -f asset/azuredeploy.json asset/ReliabilityWorkbook.json workbooks/
