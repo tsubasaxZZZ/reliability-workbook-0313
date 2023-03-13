@@ -58,7 +58,10 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -no-color tfplan
 
-      - name: Upload asset - azuredeploy.json
+      - name: ls
+        run: ls -lR
+
+      - name: Upload workbook files
         uses: actions/upload-artifact@v3
         with:
           name: asset
