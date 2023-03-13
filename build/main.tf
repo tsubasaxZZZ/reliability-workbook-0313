@@ -195,6 +195,8 @@ resource "azurerm_application_insights_workbook" "example" {
 
 // Generate workbook JSON
 resource "local_file" "workbook" {
+  count = var.deploy_community_edition_to_azure ? 1 : 0
+
   filename = "${path.module}/ReliabilityWorkbook.workbook"
   content  = local.workbook_data_json_for_community
 }

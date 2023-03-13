@@ -65,6 +65,7 @@ jobs:
           path: |
             build/azuredeploy.json
             build/ReliabilityWorkbook.json
+            artifacts/*
           if-no-files-found: error
 
   update_release_draft:
@@ -117,3 +118,4 @@ jobs:
           add: |
             workbooks/azuredeploy.json
             workbooks/ReliabilityWorkbook.json
+            asset/*.workbook
