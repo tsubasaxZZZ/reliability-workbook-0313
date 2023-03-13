@@ -63,8 +63,6 @@ jobs:
         with:
           name: asset
           path: |
-            build/azuredeploy.json
-            build/ReliabilityWorkbook.json
             artifacts/*
           if-no-files-found: error
 
