@@ -116,6 +116,6 @@ jobs:
           message: Update ARM template and Workbook
           push: origin main --force --set-upstream
           add: |
-            artifacts/*.workbook
+            asset/*.workbook
 #            workbooks/azuredeploy.json
 #            workbooks/ReliabilityWorkbook.json
