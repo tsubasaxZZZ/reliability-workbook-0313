@@ -33,3 +33,4 @@ terraform.rc
 azuredeploy.json
 terraform.tfvars
 .infracost
+artifacts
