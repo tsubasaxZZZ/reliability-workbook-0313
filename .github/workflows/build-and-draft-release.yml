@@ -119,4 +119,4 @@ jobs:
           message: Update artifacts
           push: origin main --force --set-upstream
           add: |
-            artifacts/*.workbook
+            artifacts/
