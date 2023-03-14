@@ -111,6 +111,7 @@ jobs:
           rm -rf artifacts
           mkdir artifacts
           mv asset/* artifacts/
+          ls -l artifacts > artifacts/filelist
       - uses: EndBug/add-and-commit@v9.0.1
         with:
           author_name: github-actions
