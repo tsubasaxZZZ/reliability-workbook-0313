@@ -108,6 +108,7 @@ jobs:
           overwrite: true
       - name: Create artifacts directory and move files from asset to it
         run: |
+          rm -rf artifacts
           mkdir artifacts
           mv asset/* artifacts/
       - uses: EndBug/add-and-commit@v9.0.1
