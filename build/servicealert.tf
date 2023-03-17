@@ -37,7 +37,7 @@ resource "local_file" "servicealert" {
 }
 
 resource "local_file" "armparameter_servicealert" {
-  filename = "${path.module}/artifacts/ReliabilityWorkbookServiceAlert.parameters.json"
+  filename = "${path.module}/artifacts/servicealert.parameters.json"
   content = templatefile("${path.module}/main.parameters.json.template", {
     "WORKBOOK_NAME"   = "ReliabilityWorkbookServiceAlert"
     "SERIALIZED_DATA" = jsonencode(local.workbook_servicealert_json)

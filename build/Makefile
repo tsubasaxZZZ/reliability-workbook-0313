@@ -19,16 +19,18 @@ build-workbook: ## Execute terraform plan
 
 .PHONY: build-bicep
 build-bicep: ## Build Bicep files
+	mkdir -p artifacts
 	az bicep build -f main.bicep --stdout > azuredeploy.json
 	mv azuredeploy.json artifacts
 
 .PHONY: generate-shell-script
 generate-shell-script: ## Generate deploy to Azure command
 	rm -f deploy_command
-	mkdir scripts
+	mkdir -p scripts
 	for file in $(ARM_TEMPLATE_JSON); do \
+		filename_base=$$(basename $$file .parameters.json); \
 		filename=$$(basename $$file); \
-		echo "az deployment group create -g \$$resource_group_name --template-uri \$$base_url/artifacts/azuredeploy.json --parameters \$$base_url/artifacts/$$filename" >> deploy_command; \
+		echo "az deployment group create -g \$$resource_group_name --template-uri \$$base_url/artifacts/azuredeploy.json --parameters \$$base_url/artifacts/$$filename --query 'properties.outputs.resource_id.value' -o json > $${filename_base}_id" >> deploy_command; \
 	done
 	sed -e '/__REPLACE_DEPLOY_COMMAND__/r deploy_command' -e '/__REPLACE_DEPLOY_COMMAND__/d' ./deploy-workbook.sh.template > ./scripts/deploy-workbook.sh
 

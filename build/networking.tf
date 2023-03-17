@@ -70,7 +70,7 @@ resource "local_file" "networking" {
 }
 
 resource "local_file" "armparameter_networking" {
-  filename = "${path.module}/artifacts/ReliabilityWorkbookNetworking.parameters.json"
+  filename = "${path.module}/artifacts/networking.parameters.json"
   content = templatefile("${path.module}/main.parameters.json.template", {
     "WORKBOOK_NAME"   = "ReliabilityWorkbookNetworking"
     "SERIALIZED_DATA" = jsonencode(local.workbook_networking_json)

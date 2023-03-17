@@ -48,7 +48,7 @@ resource "local_file" "web" {
 }
 
 resource "local_file" "armparameter_web" {
-  filename = "${path.module}/artifacts/ReliabilityWorkbookWeb.parameters.json"
+  filename = "${path.module}/artifacts/web.parameters.json"
   content = templatefile("${path.module}/main.parameters.json.template", {
     "WORKBOOK_NAME"   = "ReliabilityWorkbookWeb"
     "SERIALIZED_DATA" = jsonencode(local.workbook_web_json)

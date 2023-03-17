@@ -14,3 +14,5 @@ resource workbook 'Microsoft.Insights/workbooks@2022-04-01' = {
     serializedData: serializedData
   }
 }
+
+output resource_id string = workbook.id

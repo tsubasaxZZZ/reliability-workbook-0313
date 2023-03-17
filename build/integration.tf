@@ -34,7 +34,7 @@ resource "local_file" "integration" {
 }
 
 resource "local_file" "armparameter_integration" {
-  filename = "${path.module}/artifacts/ReliabilityWorkbookIntegration.parameters.json"
+  filename = "${path.module}/artifacts/integration.parameters.json"
   content = templatefile("${path.module}/main.parameters.json.template", {
     "WORKBOOK_NAME"   = "ReliabilityWorkbookIntegration"
     "SERIALIZED_DATA" = jsonencode(local.workbook_integration_json)

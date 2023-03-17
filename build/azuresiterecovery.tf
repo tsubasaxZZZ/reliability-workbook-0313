@@ -33,7 +33,7 @@ resource "local_file" "azuresiterecovery" {
   content  = local.workbook_azuresiterecovery_json
 }
 resource "local_file" "armparameter_azuresiterecovery" {
-  filename = "${path.module}/artifacts/ReliabilityWorkbookAzureSiteRecovery.parameters.json"
+  filename = "${path.module}/artifacts/azuresiterecovery.parameters.json"
   content = templatefile("${path.module}/main.parameters.json.template", {
     "WORKBOOK_NAME"   = "ReliabilityWorkbookAzureSiteRecovery"
     "SERIALIZED_DATA" = jsonencode(local.workbook_azuresiterecovery_json)

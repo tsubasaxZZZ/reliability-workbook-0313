@@ -35,7 +35,7 @@ resource "local_file" "storage" {
 }
 
 resource "local_file" "armparameter_storage" {
-  filename = "${path.module}/artifacts/ReliabilityWorkbookStorage.parameters.json"
+  filename = "${path.module}/artifacts/storage.parameters.json"
   content = templatefile("${path.module}/main.parameters.json.template", {
     "WORKBOOK_NAME"   = "ReliabilityWorkbookStorage"
     "SERIALIZED_DATA" = jsonencode(local.workbook_storage_json)
