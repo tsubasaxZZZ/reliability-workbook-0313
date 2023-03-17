@@ -7,7 +7,7 @@ help:
 .DEFAULT_GOAL := help
 
 .PHONY: all
-all: build-workbook build-bicep generate-shell-script ## Execute all steps
+all: build-workbook build-bicep ## Execute all steps
 
 .PHONY: build-workbook
 build-workbook: ## Execute terraform plan
