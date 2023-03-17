@@ -192,4 +192,3 @@ resource "azurerm_application_insights_workbook" "example" {
   display_name        = var.workbook_name
   data_json           = local.workbook_data_json_for_community
 }
-

@@ -27,3 +27,10 @@ resource "local_file" "advisor" {
   filename = "${path.module}/artifacts/ReliabilityWorkbookAdvisor.workbook"
   content  = local.workbook_advisor_json
 }
+resource "local_file" "armparameter_advisor" {
+  filename = "${path.module}/artifacts/ReliabilityWorkbookAdvisor.parameters.json"
+  content = templatefile("${path.module}/main.parameters.json.template", {
+    "WORKBOOK_NAME"   = "ReliabilityWorkbookAdvisor"
+    "SERIALIZED_DATA" = jsonencode(local.workbook_advisor_json)
+  })
+}

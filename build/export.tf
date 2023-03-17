@@ -44,3 +44,11 @@ resource "local_file" "export" {
   filename = "${path.module}/artifacts/ReliabilityWorkbookExport.workbook"
   content  = local.workbook_export_json
 }
+
+resource "local_file" "armparameter_export" {
+  filename = "${path.module}/artifacts/ReliabilityWorkbookExport.parameters.json"
+  content = templatefile("${path.module}/main.parameters.json.template", {
+    "WORKBOOK_NAME"   = "ReliabilityWorkbookExport"
+    "SERIALIZED_DATA" = jsonencode(local.workbook_export_json)
+  })
+}

@@ -33,3 +33,11 @@ resource "local_file" "containers" {
   filename = "${path.module}/artifacts/ReliabilityWorkbookContainers.workbook"
   content  = local.workbook_containers_json
 }
+
+resource "local_file" "armparameter_containers" {
+  filename = "${path.module}/artifacts/ReliabilityWorkbookContainers.parameters.json"
+  content = templatefile("${path.module}/main.parameters.json.template", {
+    "WORKBOOK_NAME"   = "ReliabilityWorkbookContainers"
+    "SERIALIZED_DATA" = jsonencode(local.workbook_containers_json)
+  })
+}
