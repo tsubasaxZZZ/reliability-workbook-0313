@@ -48,15 +48,15 @@ fi
 base_url="https://raw.githubusercontent.com/tsubasaxZZZ/reliability-workbook-0313/main/"
 
 # Deploy Workbook
-az deployment group create -g $resource_group_name --template-uri $base_url/build/main.bicep --parameters $base_url/artifacts/ReliabilityWorkbookAdvisor.parameters.json
-az deployment group create -g $resource_group_name --template-uri $base_url/build/main.bicep --parameters $base_url/artifacts/ReliabilityWorkbookAzureSiteRecovery.parameters.json
-az deployment group create -g $resource_group_name --template-uri $base_url/build/main.bicep --parameters $base_url/artifacts/ReliabilityWorkbookCompute.parameters.json
-az deployment group create -g $resource_group_name --template-uri $base_url/build/main.bicep --parameters $base_url/artifacts/ReliabilityWorkbookContainers.parameters.json
-az deployment group create -g $resource_group_name --template-uri $base_url/build/main.bicep --parameters $base_url/artifacts/ReliabilityWorkbookDatabases.parameters.json
-az deployment group create -g $resource_group_name --template-uri $base_url/build/main.bicep --parameters $base_url/artifacts/ReliabilityWorkbookExport.parameters.json
-az deployment group create -g $resource_group_name --template-uri $base_url/build/main.bicep --parameters $base_url/artifacts/ReliabilityWorkbookIntegration.parameters.json
-az deployment group create -g $resource_group_name --template-uri $base_url/build/main.bicep --parameters $base_url/artifacts/ReliabilityWorkbookNetworking.parameters.json
-az deployment group create -g $resource_group_name --template-uri $base_url/build/main.bicep --parameters $base_url/artifacts/ReliabilityWorkbookServiceAlert.parameters.json
-az deployment group create -g $resource_group_name --template-uri $base_url/build/main.bicep --parameters $base_url/artifacts/ReliabilityWorkbookStorage.parameters.json
-az deployment group create -g $resource_group_name --template-uri $base_url/build/main.bicep --parameters $base_url/artifacts/ReliabilityWorkbookSummary.parameters.json
-az deployment group create -g $resource_group_name --template-uri $base_url/build/main.bicep --parameters $base_url/artifacts/ReliabilityWorkbookWeb.parameters.json
+az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/ReliabilityWorkbookAdvisor.parameters.json
+az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/ReliabilityWorkbookAzureSiteRecovery.parameters.json
+az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/ReliabilityWorkbookCompute.parameters.json
+az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/ReliabilityWorkbookContainers.parameters.json
+az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/ReliabilityWorkbookDatabases.parameters.json
+az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/ReliabilityWorkbookExport.parameters.json
+az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/ReliabilityWorkbookIntegration.parameters.json
+az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/ReliabilityWorkbookNetworking.parameters.json
+az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/ReliabilityWorkbookServiceAlert.parameters.json
+az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/ReliabilityWorkbookStorage.parameters.json
+az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/ReliabilityWorkbookSummary.parameters.json
+az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/ReliabilityWorkbookWeb.parameters.json
