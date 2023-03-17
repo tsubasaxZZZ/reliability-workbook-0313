@@ -6,11 +6,12 @@ log() {
 }
 
 prompt() {
+    varname=$1
     optional=$3
     read_str=
     while :
     do
-        echo -n "$1"
+        echo -n "$2"
         read read_str
         if [ x$read_str = x"" -a x$optional = x"" ]; then
             continue
@@ -18,20 +19,17 @@ prompt() {
             break
         fi
     done
-    echo $read_str > $2
+    eval "$varname=$read_str"
 }
 
 # Get target subscription from user input
-prompt "Enter target Subscription ID: " subscription_id
-subscription_id=`cat subscription_id`
+prompt subscription_id "Enter target Subscription ID: "
 
 # Get target resource group from user input
-prompt "Enter target Resource Group name: " resource_group_name
-resource_group_name=`cat resource_group_name`
+prompt resource_group_name "Enter target Resource Group name: "
 
 # Get tenant from user input
-prompt "Enter target Tenant name(optional): " tenant yes
-tenant=`cat tenant`
+prompt tenant "Enter target Tenant name(optional): " this-is-option
 [ x$tenant != x"" ] && tenant="-t $tenant"
 
 # az login
@@ -46,15 +44,32 @@ if [ $? -ne 0 ]; then
 fi
 
 base_url="https://raw.githubusercontent.com/tsubasaxZZZ/reliability-workbook-0313/main/"
+# Download file list
+[ ! -f workbook_filelist ] && wget $base_url/artifacts/workbook_filelist
+cat workbook_filelist | while read f
+do
+    [ ! -f $f ] && wget $base_url/artifacts/$f
+done
 
 # Deploy Workbook
+for f in *.workbook
+do
+  filename_base=`basename $f .workbook`
+  filename=`basename $f`
+  file_size=$(stat -c%s "$f")
+  if [ ! -e ${filename_base}_id -o $file_size -eq 0 ]; then
+    log "Deploy ${filename_base}"
+    az deployment group create --name $filename_base -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters serializedData=@$filename --parameters name=$filename_base --query 'properties.outputs.resource_id.value' -o json > ${filename_base}_id
+  fi
+done
 
 [ ! -e workbook.tpl.json ] && wget $base_url/build/templates/workbook.tpl.json
 for f in *_id
 do
     resource_id=`cat $f | tr -d '\"'`
-    resource_type=`echo $f | sed 's/_id//g'`
-    # Replace placeholder in the file by sed
+    # Get resource type from filename (e.g.: ReliabilityWorkbookExport.workbook -> export)
+    resource_type=`echo $f | sed -e 's/.*Workbook\([^.]*\).*_id/\L\1/g'`
+    # Replace placeholder in the file
     sed -i "s#\\\${${resource_type}_workbook_resource_id}#$resource_id#g" workbook.tpl.json
 done
 
@@ -87,7 +102,7 @@ EOS
 escaped_replacement_text=$(printf '%s\n' "$link_of_Summary" | sed 's:[\/&]:\\&:g;$!s/$/\\/')
 sed -i "s/\${link_of_Summary}/$escaped_replacement_text/g" workbook.tpl.json
 
-summary_id=$(cat summary_id)
+summary_id=$(cat ReliabilityWorkbookSummary_id | tr -d '\"')
 tab_of_Summary=$(cat <<EOS
     ,{
       "type": 12,
@@ -124,7 +139,7 @@ EOS
 escaped_replacement_text=$(printf '%s\n' "$link_of_Advisor" | sed 's:[\/&]:\\&:g;$!s/$/\\/')
 sed -i "s/\${link_of_Advisor}/$escaped_replacement_text/g" workbook.tpl.json
 
-advisor_id=$(cat advisor_id)
+advisor_id=$(cat ReliabilityWorkbookAdvisor_id | tr -d '\"')
 tab_of_Advisor=$(cat <<EOS
     ,{
       "type": 12,
@@ -160,7 +175,7 @@ EOS
 escaped_replacement_text=$(printf '%s\n' "$link_of_Export" | sed 's:[\/&]:\\&:g;$!s/$/\\/')
 sed -i "s/\${link_of_Export}/$escaped_replacement_text/g" workbook.tpl.json
 
-export_id=$(cat export_id)
+export_id=$(cat ReliabilityWorkbookExport_id | tr -d '\"')
 tab_of_Export=$(cat <<EOS
     ,{
       "type": 12,
@@ -182,3 +197,5 @@ EOS
 escaped_replacement_text=$(printf '%s\n' "$tab_of_Export" | sed 's:[\/&]:\\&:g;$!s/$/\\/')
 sed -i "s/\${tab_of_Export}/$escaped_replacement_text/g" workbook.tpl.json
 
+log "Deploy FTA - Reliability Workbook"
+az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters name="FTA - Reliability Workbook" serializedData=@workbook.tpl.json

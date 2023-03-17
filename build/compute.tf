@@ -47,11 +47,3 @@ resource "local_file" "compute" {
   filename = "${path.module}/artifacts/ReliabilityWorkbookCompute.workbook"
   content  = local.workbook_compute_json
 }
-
-resource "local_file" "armparameter_compute" {
-  filename = "${path.module}/artifacts/compute.parameters.json"
-  content = templatefile("${path.module}/main.parameters.json.template", {
-    "WORKBOOK_NAME"   = "ReliabilityWorkbookCompute"
-    "SERIALIZED_DATA" = jsonencode(local.workbook_compute_json)
-  })
-}
