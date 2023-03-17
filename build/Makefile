@@ -38,4 +38,3 @@ clean: ## Remove generated files
 	rm -rf ./artifacts/
 	rm -f ./deploy_command
 	rm -rf ./scripts/
-
