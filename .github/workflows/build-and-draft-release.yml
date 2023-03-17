@@ -51,12 +51,8 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
-      - name: Terraform Plan
-        id: plan
-        run: make terraform-plan
-
-      - name: Terraform Apply
-        run: terraform apply -no-color tfplan
+      - name: Build workbook by Terraform
+        run: make build-workbook generate-shell-script
 
       - name: ls
         run: ls -lR
@@ -67,6 +63,7 @@ jobs:
           name: asset
           path: |
             build/artifacts/*
+            scripts
           if-no-files-found: error
 
   update_release_draft:
@@ -111,7 +108,6 @@ jobs:
           rm -rf artifacts
           mkdir artifacts
           mv asset/* artifacts/
-          ( cd artifacts/ && ls *.workbook >filelist )
       - uses: EndBug/add-and-commit@v9.0.1
         with:
           author_name: github-actions
@@ -120,3 +116,4 @@ jobs:
           push: origin main --force --set-upstream
           add: |
             artifacts/
+            scripts/
