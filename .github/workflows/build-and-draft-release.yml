@@ -106,7 +106,7 @@ jobs:
         run: |
           rm -rf artifacts
           mkdir artifacts
-          mv asset/artifacts/* artifacts/
+          mv asset/* artifacts/
       - uses: EndBug/add-and-commit@v9.0.1
         with:
           author_name: github-actions
