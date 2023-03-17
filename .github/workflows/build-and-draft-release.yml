@@ -52,7 +52,7 @@ jobs:
         run: terraform validate -no-color
 
       - name: Build workbook by Terraform
-        run: make build-workbook generate-shell-script
+        run: make all
 
       - name: ls
         run: ls -lR
@@ -63,7 +63,7 @@ jobs:
           name: asset
           path: |
             build/artifacts/*
-            scripts
+            build/scripts/*
           if-no-files-found: error
 
   update_release_draft:
@@ -108,7 +108,7 @@ jobs:
           rm -rf artifacts
           mkdir artifacts
           mv asset/build/artifacts/* artifacts/
-          mv asset/scripts/* scripts/
+          mv asset/build/scripts/* scripts/
       - uses: EndBug/add-and-commit@v9.0.1
         with:
           author_name: github-actions
