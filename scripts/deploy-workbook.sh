@@ -48,18 +48,6 @@ fi
 base_url="https://raw.githubusercontent.com/tsubasaxZZZ/reliability-workbook-0313/main/"
 
 # Deploy Workbook
-az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/advisor.parameters.json --query 'properties.outputs.resource_id.value' -o json > advisor_id
-az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/azuresiterecovery.parameters.json --query 'properties.outputs.resource_id.value' -o json > azuresiterecovery_id
-az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/compute.parameters.json --query 'properties.outputs.resource_id.value' -o json > compute_id
-az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/containers.parameters.json --query 'properties.outputs.resource_id.value' -o json > containers_id
-az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/databases.parameters.json --query 'properties.outputs.resource_id.value' -o json > databases_id
-az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/export.parameters.json --query 'properties.outputs.resource_id.value' -o json > export_id
-az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/integration.parameters.json --query 'properties.outputs.resource_id.value' -o json > integration_id
-az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/networking.parameters.json --query 'properties.outputs.resource_id.value' -o json > networking_id
-az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/servicealert.parameters.json --query 'properties.outputs.resource_id.value' -o json > servicealert_id
-az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/storage.parameters.json --query 'properties.outputs.resource_id.value' -o json > storage_id
-az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/summary.parameters.json --query 'properties.outputs.resource_id.value' -o json > summary_id
-az deployment group create -g $resource_group_name --template-uri $base_url/artifacts/azuredeploy.json --parameters $base_url/artifacts/web.parameters.json --query 'properties.outputs.resource_id.value' -o json > web_id
 
 [ ! -e workbook.tpl.json ] && wget $base_url/build/templates/workbook.tpl.json
 for f in *_id
