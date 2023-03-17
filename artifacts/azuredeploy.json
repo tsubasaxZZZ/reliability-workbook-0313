@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.15.31.15270",
-      "templateHash": "12005516276232364553"
+      "templateHash": "14389418748967454069"
     }
   },
   "parameters": {
@@ -35,5 +35,11 @@
         "serializedData": "[parameters('serializedData')]"
       }
     }
-  ]
+  ],
+  "outputs": {
+    "resource_id": {
+      "type": "string",
+      "value": "[resourceId('Microsoft.Insights/workbooks', guid(parameters('name')))]"
+    }
+  }
 }
