@@ -16,7 +16,7 @@ build-workbook: ## Execute terraform plan
 	terraform plan -input=false -no-color -out tfplan $(addprefix -target local_file.,$(basename $(notdir $(TERRAFORM_TARGET))))
 	terraform apply -no-color tfplan
 	mkdir -p artifacts
-	ls artifacts/*.workbook > artifacts/workbook_filelist
+	(cd artifacts && ls *.workbook > workbook_filelist)
 #	terraform plan -input=false -no-color -out tfplan $(addprefix -target local_file.armparameter_,$(basename $(notdir $(TERRAFORM_TARGET))))
 #	terraform apply -no-color tfplan
 
