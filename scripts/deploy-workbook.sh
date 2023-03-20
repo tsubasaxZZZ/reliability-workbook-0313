@@ -28,7 +28,7 @@ prompt subscription_id "Enter target Subscription ID: "
 # Get target resource group from user input
 prompt resource_group_name "Enter target Resource Group name: "
 
-# If this script doesn't run on CloudShell, it gets the several variables from user
+# If this script doesn't run on CloudShell, it will execute login to Azure
 if [ x$ACC_CLOUD = x"" ]; then
   # Get tenant from user input
   prompt tenant "Enter target Tenant name(optional): " this-is-option
@@ -37,9 +37,7 @@ if [ x$ACC_CLOUD = x"" ]; then
   # az login
   log "Login to Azure"
   az login $tenant --use-device-code
-  
 fi
-
 
 log "Check existance of target resource group"
 az group show --name $resource_group_name --subscription $subscription_id
