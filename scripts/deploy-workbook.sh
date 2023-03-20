@@ -22,14 +22,14 @@ prompt() {
     eval "$varname=$read_str"
 }
 
+# Get target subscription from user input
+prompt subscription_id "Enter target Subscription ID: "
+
+# Get target resource group from user input
+prompt resource_group_name "Enter target Resource Group name: "
+
 # If this script doesn't run on CloudShell, it gets the several variables from user
 if [ x$ACC_CLOUD = x"" ]; then
-  # Get target subscription from user input
-  prompt subscription_id "Enter target Subscription ID: "
-
-  # Get target resource group from user input
-  prompt resource_group_name "Enter target Resource Group name: "
-
   # Get tenant from user input
   prompt tenant "Enter target Tenant name(optional): " this-is-option
   [ x$tenant != x"" ] && tenant="-t $tenant"
